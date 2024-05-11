@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     dir('/home/umesh/SPE/mlops/src') {
-                        sh 'dockercompose up -d'
+                        sh 'docker compose up -d'
                     }
                 }
             }
