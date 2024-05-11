@@ -5,7 +5,7 @@ pipeline {
         CARPRICE_IMAGE_NAME = 'carprice'
         PREDICTOR_IMAGE_NAME = 'predictor-app'
         MODEL_LOADER_IMAGE_NAME = 'model-loader'
-        DOCKER_HUB_USERNAME = 'adityavit36'
+        DOCKER_HUB_USERNAME = 'umeshjaware'
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Checkout the code from the GitHub repository
                 git branch: 'main', 
-                url: 'https://github.com/adityavit36/speproject.git'
+                url: 'https://github.com/ume950/MLOPS.git'
             }
         }
 
@@ -35,8 +35,8 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
-                    dir('/home/aditya/adityamin/MLOPS/mlops/src') {
-                        sh '/usr/local/bin/docker-compose up -d'
+                    dir('/home/umesh/SPE/mlops/src') {
+                        sh 'dockercompose up -d'
                     }
                 }
             }
