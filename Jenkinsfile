@@ -42,10 +42,11 @@ pipeline {
             }
         }
 
-        stage('Send Logs to Logstash') {
-            steps {
-                logstashSend buildLogPath: 'build.log', maxLines: 1000
-            }
-        }
+    stage('Send Logs to Logstash') {
+    steps {
+        logstashSend buildLogPath: '$JENKINS_HOME/jobs/CarPricePred/builds/lastSuccessfulBuild/log', maxLines: 1000
+    }
+}
+
     }
 }
