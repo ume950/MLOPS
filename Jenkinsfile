@@ -35,7 +35,7 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
-                    dir('/home/umesh/Downloads/speproject-master') {
+                    dir('/home/umesh/Downloads/MLOPS/mlops/src') {
                         sh 'docker compose up -d'
                     }
                 }
