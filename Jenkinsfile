@@ -41,5 +41,11 @@ pipeline {
                 }
             }
         }
+
+        stage('Send Logs to Logstash') {
+            steps {
+                logstashSend buildLogPath: 'build.log', maxLines: 1000
+            }
+        }
     }
 }
