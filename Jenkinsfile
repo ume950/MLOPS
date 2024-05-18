@@ -44,7 +44,7 @@ pipeline {
 
     stage('Send Logs to Logstash') {
     steps {
-     logstash failBuild: true, maxLines: 1000
+     logstash()
     }
 }
 
