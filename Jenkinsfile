@@ -42,12 +42,7 @@ pipeline {
 
         stage('Send Logs to Logstash') {
             steps {
-                script {
-                    // Send the build logs to Logstash
-                    logstash {
-                        echo 'This is a message that will be sent to Logstash.'
-                    }
-                }
+                logstashSend build: env.BUILD_NUMBER, maxLines: 10000, maxRetries: 5
             }
         }
     }
