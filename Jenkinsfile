@@ -29,16 +29,16 @@ pipeline {
             }
         }
 
-        stage('Run Docker Compose') {
-            steps {
-                script {
-                    // Run Docker Compose in the specified directory
-                    dir('/home/umesh/Downloads/MLOPS/mlops/src') {
-                        sh 'docker compose up -d'
-                    }
-                }
-            }
-        }
+        // stage('Run Docker Compose') {
+        //     steps {
+        //         script {
+        //             // Run Docker Compose in the specified directory
+        //             dir('/home/umesh/Downloads/MLOPS/mlops/src') {
+        //                 sh 'docker compose up -d'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Send Logs to Logstash') {
             steps {
