@@ -42,7 +42,10 @@ pipeline {
 
         stage('Send Logs to Logstash') {
             steps {
-                logstashSend build: env.BUILD_NUMBER, maxLines: 10000, maxRetries: 5
+                script {
+                    // Send the build logs to Logstash
+                    logstashSend(logstashUrl: '127.0.0.1:9600', maxLines: 10000)
+                }
             }
         }
     }
