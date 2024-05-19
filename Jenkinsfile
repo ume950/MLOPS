@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the GitHub repository
-                git branch: 'master', 
+                git branch: 'main', 
                 url: 'https://github.com/ume950/MLOPS.git'
             }
         }
