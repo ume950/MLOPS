@@ -15,14 +15,13 @@ pipeline {
                 url: 'https://github.com/ume950/MLOPS.git'
             }
         }
-        stage('Test') {
+       stage('Test') {
     steps {
         script {
-            // Install the required Python packages
-            sh 'pip install flask numpy flask_cors scikit-learn'
+            // Install the specific versions of the required Python packages
+            sh 'pip install flask==3.0.3 numpy==1.26.4 flask_cors==4.0.0 scikit-learn==1.3.0'
 
-            // Assuming your tests are in the same directory as predictor.py
-            // and your working directory is /home/aditya/adityamin/MLOPS/mlops/src
+            // Change the working directory to where your tests are located
             dir('/home/umesh/Downloads/MLOPS/mlops/src') {
                 // Run unit tests for the backend
                 sh 'python3 -m unittest discover -s . -p "test_app.py"'
@@ -30,6 +29,7 @@ pipeline {
         }
     }
 }
+
 
         // stage('Build Docker Images') {
         //     steps {
