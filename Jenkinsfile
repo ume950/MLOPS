@@ -1,52 +1,71 @@
 pipeline {
     agent any
-
     environment {
-        // Define the Docker image names
+        DOCKER_HUB_USERNAME = 'umeshjaware'
         CARPRICE_IMAGE_NAME = 'carprice'
         PREDICTOR_IMAGE_NAME = 'predictor-app'
         MODEL_LOADER_IMAGE_NAME = 'model-loader'
-        DOCKER_HUB_USERNAME = 'umeshjaware'
+	// EC2_INSTANCE_IP = '65.0.248.48'
     }
-
     stages {
         stage('Checkout') {
             steps {
                 // Checkout the code from the GitHub repository
-                git branch: 'main', 
+                git branch: 'master', 
                 url: 'https://github.com/ume950/MLOPS.git'
             }
         }
-
-        stage('Pull Docker Images') {
+        stage('Test') {
             steps {
                 script {
-                    // Pull Docker images from Docker Hub
-                    docker.image("${DOCKER_HUB_USERNAME}/${CARPRICE_IMAGE_NAME}:latest").pull()
-                    docker.image("${DOCKER_HUB_USERNAME}/${PREDICTOR_IMAGE_NAME}:latest").pull()
-                    docker.image("${DOCKER_HUB_USERNAME}/${MODEL_LOADER_IMAGE_NAME}:latest").pull()
+                    // sh 'pip install flake8'
+                    // sh 'flake8 .'
+                    // sh 'black --check .'
+                    // Run unit tests for the backend
+                    dir('/home/umesh/Downloads/MLOPS/mlops/src') {
+                        sh 'python3 -m unittest discover tests'
+                    }
                 }
             }
         }
-
-        // stage('Run Docker Compose') {
+        // stage('Build Docker Images') {
         //     steps {
         //         script {
-        //             // Run Docker Compose in the specified directory
-        //             dir('/home/umesh/Downloads/MLOPS/mlops/src') {
-        //                 sh 'docker compose up -d'
+        //             // Build Docker images
+        //             sh 'docker build -t adityavit36/carprice -f /home/aditya/adityamin/MLOPS/mlops/src/react_docker /home/aditya/adityamin/MLOPS/mlops'
+        //             sh 'docker build -t adityavit36/predictor-app -f /home/aditya/adityamin/MLOPS/mlops/src/predictor-app /home/aditya/adityamin/MLOPS/mlops/src'
+        //             sh 'docker build -t adityavit36/model-loader -f /home/aditya/adityamin/MLOPS/mlops/src/model_loader_dockerfile /home/aditya/adityamin/MLOPS/mlops/src'
+        //         }
+        //     }
+        // }
+        // stage('Push Docker Images') {
+        //     steps {
+        //         script {
+        //             docker.withRegistry('', 'DockerHubCred') {
+        //                 sh 'docker push adityavit36/carprice:latest'
+        //                 sh 'docker push adityavit36/predictor-app:latest'
+        //                 sh 'docker push adityavit36/model-loader:latest'
         //             }
         //         }
         //     }
         // }
-
-        stage('Send Logs to Logstash') {
-            steps {
-                script {
-                    // Send the build logs to Logstash
-                    logstashSend(logstashUrl: '127.0.0.1:9600', maxLines: 10000)
-                }
-            }
-        }
+        // stage('Run Ansible Playbook') {
+        //     steps {
+        //         ansiblePlaybook(
+        //             playbook: 'deploy.yml',
+        //             inventory: 'inventory'
+        //         )
+        //     }
+        //}
+   //      stage('Deploy to EC2') {
+	  //       steps {
+	  //           ansiblePlaybook(
+	  //               playbook: 'deploy-ec2.yml',
+	  //               inventory: 'ec2-inventory',
+			// credentialsId: '41668044-b19d-41a2-98ac-6d281b0a30d9',
+			// extras: '-e ansible_user=ec2-user -e ansible_ssh_private_key_file=/home/aditya/Downloads/adityavit36_spe.pem'
+	  //           )
+   //  	    }
+    	// }
     }
 }
