@@ -19,7 +19,7 @@ pipeline {
     steps {
         script {
             // Install the required Python packages
-            sh 'pip install flask numpy flask_cors'
+            sh 'pip install flask numpy flask_cors scikit-learn'
 
             // Assuming your tests are in the same directory as predictor.py
             // and your working directory is /home/aditya/adityamin/MLOPS/mlops/src
