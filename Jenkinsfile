@@ -16,18 +16,21 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
-                script {
-                    // sh 'pip install flake8'
-                    // sh 'flake8 .'
-                    // sh 'black --check .'
-                    // Run unit tests for the backend
-                    dir('/home/umesh/Downloads/MLOPS/mlops/src') {
-                        sh 'python3 -m unittest discover tests'
-                    }
-                }
+    steps {
+        script {
+            // Install the required Python packages
+            sh 'pip install flask numpy flask_cors'
+
+            // Assuming your tests are in the same directory as predictor.py
+            // and your working directory is /home/aditya/adityamin/MLOPS/mlops/src
+            dir('/home/umesh/Downloads/MLOPS/mlops/src') {
+                // Run unit tests for the backend
+                sh 'python3 -m unittest discover -s . -p "test_app.py"'
             }
         }
+    }
+}
+
         // stage('Build Docker Images') {
         //     steps {
         //         script {
