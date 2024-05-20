@@ -23,12 +23,13 @@ pipeline {
 
             // Change the working directory to where your tests are located
             dir('/home/umesh/Downloads/MLOPS/mlops/src') {
-                // Run unit tests for the backend
-                sh 'python3 -m unittest discover -s . -p "test_app.py"'
+                // Run unit tests for the backend and redirect output to a log file
+                sh 'python3 -m unittest discover -s . -p "test_app.py" > test_results.log 2>&1'
             }
         }
     }
 }
+
 
 
         // stage('Build Docker Images') {
