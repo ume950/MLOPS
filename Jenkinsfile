@@ -32,27 +32,27 @@ pipeline {
 
 
 
-        // stage('Build Docker Images') {
-        //     steps {
-        //         script {
-        //             // Build Docker images
-        //             sh 'docker build -t adityavit36/carprice -f /home/aditya/adityamin/MLOPS/mlops/src/react_docker /home/aditya/adityamin/MLOPS/mlops'
-        //             sh 'docker build -t adityavit36/predictor-app -f /home/aditya/adityamin/MLOPS/mlops/src/predictor-app /home/aditya/adityamin/MLOPS/mlops/src'
-        //             sh 'docker build -t adityavit36/model-loader -f /home/aditya/adityamin/MLOPS/mlops/src/model_loader_dockerfile /home/aditya/adityamin/MLOPS/mlops/src'
-        //         }
-        //     }
-        // }
-        // stage('Push Docker Images') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('', 'DockerHubCred') {
-        //                 sh 'docker push adityavit36/carprice:latest'
-        //                 sh 'docker push adityavit36/predictor-app:latest'
-        //                 sh 'docker push adityavit36/model-loader:latest'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    // Build Docker images
+                    sh 'docker build -t umeshjaware/carprice -f /home/umesh/Downloads/MLOPS/mlops/src/react_docker /home/umesh/Downloads/MLOPS/mlops/src/'
+                    sh 'docker build -t umeshjaware/predictor-app -f /home/umesh/Downloads/MLOPS/mlops/src/predictor-app /home/umesh/Downloads/MLOPS/mlops/src/'
+                    sh 'docker build -t umeshjaware/model-loader -f /home/umesh/Downloads/MLOPS/mlops/src/model_loader_dockerfile /home/umesh/Downloads/MLOPS/mlops/src/'
+                }
+            }
+        }
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    docker.withRegistry('', 'DockerHubCred') {
+                        sh 'docker push umeshjaware/carprice:latest'
+                        sh 'docker push umeshjaware/predictor-app:latest'
+                        sh 'docker push umeshjaware/model-loader:latest'
+                    }
+                }
+            }
+        }
         // stage('Run Ansible Playbook') {
         //     steps {
         //         ansiblePlaybook(
@@ -60,7 +60,7 @@ pipeline {
         //             inventory: 'inventory'
         //         )
         //     }
-        //}
+        // }
    //      stage('Deploy to EC2') {
 	  //       steps {
 	  //           ansiblePlaybook(
