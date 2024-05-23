@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker images
-                    sh 'docker build -t umeshjaware/carprice -f /home/umesh/Downloads/MLOPS/mlops/src/react_docker /home/umesh/Downloads/MLOPS/mlops/src/'
+                    sh 'docker build -t umeshjaware/carprice -f /home/umesh/Downloads/MLOPS/mlops/src/react_docker /home/umesh/Downloads/MLOPS/mlops/'
                     sh 'docker build -t umeshjaware/predictor-app -f /home/umesh/Downloads/MLOPS/mlops/src/predictor-app /home/umesh/Downloads/MLOPS/mlops/src/'
                     sh 'docker build -t umeshjaware/model-loader -f /home/umesh/Downloads/MLOPS/mlops/src/model_loader_dockerfile /home/umesh/Downloads/MLOPS/mlops/src/'
                 }
